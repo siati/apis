@@ -1,0 +1,21 @@
+<IfModule mod_rewrite.c>
+
+    # Always set these headers.
+    Header always set Access-Control-Allow-Origin "*"
+    Header always set Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE, PUT"
+    Header always set Access-Control-Max-Age "1000"
+    Header always set Access-Control-Allow-Headers "x-requested-with, Content-Type, origin, authorization, accept, client-security-token"
+
+
+    RewriteEngine On
+
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-s
+    RewriteRule ^(.*)$ api.php?rquest=$1 [QSA,NC,L]
+
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^(.*)$ api.php [QSA,NC,L]
+
+    RewriteCond %{REQUEST_FILENAME} -s
+    RewriteRule ^(.*)$ api.php [QSA,NC,L]	
+</IfModule>
